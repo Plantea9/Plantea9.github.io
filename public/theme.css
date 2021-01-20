@@ -1,0 +1,64 @@
+:root {
+  /* colors */
+  --white: #fff;
+  --white-2: #eee;
+  --white-3: #ddd;
+  --white-4: #dcdcdc;
+  --white-5: #f6f8fa;
+  --black: #000;
+  --black-01: #010101;
+  --black-2: #111;
+  --black-3: #222;
+  --black-4: #333;
+  --black-5: #2f363d;
+  --gray: #555;
+  --gray-2: #607D8B;
+  --gray-3: #CFD8DC;
+  --transparent-gray: #ffffff66;
+  --transparent-black:#00000080;
+  --transparent-black-2:#000000e6;
+  --purple: #8048b7;
+  --purple-2: #A463F2;
+  --pale-purple: #EBE0F5;
+  --pale-purple-2: #B298DC;
+
+  /* theme */
+  /* --primary: var(--black-4);
+  --secondary: var(--white-5);
+  --primary-text: var(--black-5);
+  --secondary-text: var(--white-3);
+  --accent: var(--gray-2); */
+  --main: var(--black-5);
+  --main-2: var(--black-4);
+  --bg: var(--white-5);
+  --bg-2: var(--pale-purple);
+  --text: var(--black-4);
+  --text-2: var(--black-5);
+  --accent: var(--purple);
+  --accent-2: var(--purple-2);
+}
+
+.dark-theme {
+  /* --primary: var(--black-5);
+  --secondary: var(--black-01);
+  --primary-text: var(--white);
+  --secondary-text: var(--white-2);
+  --accent: var(--white); */
+  --main: var(--white-5);
+  --main-2: var(--white-2);
+  --bg: var(--black-5);
+  --bg-2: var(--gray);
+  --text: var(--white-4);
+  --text-2: var(--white-5);
+  --accent: var(--pale-purple-2);
+  --accent-2: var(--pale-purple);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a, a:visited {
+  color: var(--accent);
+}
