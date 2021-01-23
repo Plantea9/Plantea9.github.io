@@ -15,7 +15,12 @@ module.exports = {
         }
       }
     }),
-    extend: {}
+    extend: {
+      zIndex: {
+        '-10': '-10'
+      },
+      textColor: ['visited']
+    }
   },
   variants: {},
   plugins: [
