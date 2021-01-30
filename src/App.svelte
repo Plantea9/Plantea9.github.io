@@ -1,6 +1,7 @@
 <script>
   import { Router, link, Route } from 'svelte-routing'
   import Index from './pages/Index.svelte'
+  import Resources from './pages/Resources.svelte'
   import Footer from './ui/Footer.svelte'
 
   export let url = ''
@@ -16,7 +17,7 @@
 
   <main class="my-0 mx-auto relative max-w-4xl bg-transparent p-8 box-border z-10 pb-16 sm:pt-16">
     <Route path='/' component={Index}></Route>
-    <Route path='/resources'>Recursos...</Route>
+    <Route path='/resources' component={Resources}></Route>
   </main>
 </Router>
 
@@ -25,3 +26,14 @@
 <svelte:head>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </svelte:head>
+
+<style>
+  main {
+    min-height: calc(100vh - 232px);
+  }
+  @media only screen and (max-width : 768px) {
+    main {
+      min-height: calc(100vh - 208px);
+    }
+  }
+</style>
