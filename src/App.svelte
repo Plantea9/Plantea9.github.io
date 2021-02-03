@@ -3,6 +3,7 @@
   import Index from './pages/Index.svelte'
   import Resources from './pages/Resources.svelte'
   import Blog from './pages/Blog.svelte'
+  import Post from './pages/Post.svelte'
   import Footer from './ui/Footer.svelte'
 
   export let url = ''
@@ -21,6 +22,9 @@
     <Route path='/' component={Index}></Route>
     <Route path='/resources' component={Resources}></Route>
     <Route path='/blog' component={Blog}></Route>
+    <Route path='/blog/:id' let:params>
+      <Post id={params.id}></Post>
+    </Route>
   </main>
 </Router>
 
