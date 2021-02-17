@@ -19,12 +19,12 @@
   <Header {links}></Header>
 
   <main class="my-0 mx-auto relative max-w-4xl bg-transparent p-8 box-border z-10 pb-16 sm:pt-16">
-    <Route path='/' component={Index}></Route>
     <Route path='/resources' component={Resources}></Route>
-    <Route path='/blog' component={Blog}></Route>
     <Route path='/blog/:id' let:params>
       <Post id={params.id}></Post>
     </Route>
+    <Route path='/blog' component={Blog}></Route>
+    <Route path='/' component={Index}></Route>
   </main>
 </Router>
 
