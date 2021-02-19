@@ -5,7 +5,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --single",
-    "publish": "npm run build && node ./scripts/build.js"
+    "publish": "npm run build && cp public/index.html public/404.html && node ./scripts/build.js"
   },
   "devDependencies": {
     "@beyonk/svelte-google-analytics": "^2.2.0",
