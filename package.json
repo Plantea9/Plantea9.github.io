@@ -8,6 +8,7 @@
     "publish": "npm run build && node ./scripts/build.js"
   },
   "devDependencies": {
+    "@beyonk/svelte-google-analytics": "^2.2.0",
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",

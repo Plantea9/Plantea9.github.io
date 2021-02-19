@@ -1,4 +1,5 @@
 <script>
+  import { GoogleAnalytics } from '@beyonk/svelte-google-analytics'
   import { Router, Route } from 'svelte-routing'
   import Index from './pages/Index.svelte'
   import Resources from './pages/Resources.svelte'
@@ -14,6 +15,8 @@
     { href: '/blog', name: 'Blog' }
   ]
 </script>
+
+<GoogleAnalytics properties={[ '262801169' ]} />
 
 <Router {url}>
   <Header {links}></Header>
@@ -38,9 +41,7 @@
   main {
     min-height: calc(100vh - 232px);
   }
-  .burger-btn {
-    background-color: var(--bg);
-  }
+
   @media only screen and (max-width : 768px) {
     main {
       min-height: calc(100vh - 208px);

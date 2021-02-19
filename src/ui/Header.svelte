@@ -58,3 +58,9 @@
     </div>
   </div>
 {/if}
+
+<style>
+  .burger-btn {
+    background-color: var(--bg);
+  }
+</style>
