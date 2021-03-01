@@ -9,7 +9,7 @@
     const response = await fetch(process.env.ACCESOS_DIRECTOS_URL)
     links = await response.json()
     if (response.ok) {
-      // loading = false
+      loading = false
     }
   })()
 </script>

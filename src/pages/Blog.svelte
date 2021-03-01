@@ -1,9 +1,15 @@
 <script>
   import { navigate } from 'svelte-routing'
+  import Loading from '../ui/Loading.svelte'
+
   let posts = []
+  let loading = true
   ;(async () => {
     const response = await fetch(process.env.POSTS_URL)
     posts = await response.json()
+    if (response.ok) {
+      loading = false
+    }
   })()
 
   function showDate (date) {
@@ -140,14 +146,18 @@
   }
 </script>
 
-{#each posts as post}
-  <div class="relative pt-6 shadow-lg rounded-md bg-white">
-    <h2 class="font-bold text-xl mb-4 px-4">{post.Titulo}</h2>
-    <div class="text-gray-500 mb-8 px-4">{@html trimHtml(post.Contenido).html}</div>
-    <a on:click={e => navigate(`/blog/${post.id}`)} class="cursor-pointer absolute inset-x-0 w-20 rounded-xl bg-purple-900 text-gray-100 py-1 px-2 justify-center items-center mx-auto my-0 flex text-sm bottom-20">Leer más</a>
-    <div class="flex flex-col px-4 pb-6 pt-4 bg-gradient-to-r from-purple-400 to-purple-300 rounded-b-md">
-      <span class="text-white font-medium">{post.Author.username}</span>
-      <span class="text-gray-200">{showDate(post.createdAt)}</span>
+{#if loading}
+  <Loading></Loading>
+{:else}
+  {#each posts as post}
+    <div class="relative pt-6 shadow-lg rounded-md bg-white">
+      <h2 class="font-bold text-xl mb-4 px-4">{post.Titulo}</h2>
+      <div class="text-gray-500 mb-8 px-4">{@html trimHtml(post.Contenido).html}</div>
+      <a on:click={e => navigate(`/blog/${post.id}`)} class="cursor-pointer absolute inset-x-0 w-20 rounded-xl bg-purple-900 text-gray-100 py-1 px-2 justify-center items-center mx-auto my-0 flex text-sm bottom-20">Leer más</a>
+      <div class="flex flex-col px-4 pb-6 pt-4 bg-gradient-to-r from-purple-400 to-purple-300 rounded-b-md">
+        <span class="text-white font-medium">{post.Author.username}</span>
+        <span class="text-gray-200">{showDate(post.createdAt)}</span>
+      </div>
     </div>
-  </div>
-{/each}
+  {/each}
+{/if}
