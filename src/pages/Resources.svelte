@@ -1,13 +1,18 @@
 <script>
   import Loading from '../ui/Loading.svelte'
+  import TagInput from '../ui/TagInput.svelte'
 
   let resources = []
+  let allResources = []
   let params = null
   let tags = []
   let loading = true
   ;(async () => {
     const response = await fetch(process.env.RECURSOS_URL)
-    resources = await response.json()
+    allResources = await response.json()
+    if (resources.length === 0) {
+      resources = allResources
+    }
     if (response.ok) {
       loading = false
     }
@@ -15,13 +20,35 @@
 
   $: params = new URLSearchParams(document.location.search.substring(1))
   $: if (params && params.has('tags')) {
-    tags = params.get('tags').split(',')
-    resources = resources.filter(res => res.tags.map(tag => tag.nombre).some(tag => tags.includes(tag)))
+    tags = params.get('tags').replace(/\+/g, ' ').replace(/%2C/g, ',').replace(/=/g, '').split(',')
+    resources = allResources.filter(res => res.tags.map(tag => tag.nombre).some(tag => tags.includes(tag)))
   }
 
   let current
   function download (resource) {
+    const a = document.createElement('a')
+    a.href = resource.archivo.url
+    a.download = true
+    a.target = '_blank'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
 
+  function reloadTags (event) {
+    const url = new URL(window.location)
+    if (event.detail.tags && Array.isArray(event.detail.tags) && event.detail.tags.length > 0) {
+      url.searchParams.set('tags', new URLSearchParams(event.detail.tags.join(',')))
+    } else {
+      url.searchParams.delete('tags')
+    }
+    // tags = event.detail.tags
+    if (event.detail.tags.length > 0) {
+      resources = allResources.filter(res => res.tags.map(tag => tag.nombre).some(tag => event.detail.tags.includes(tag)))
+    } else {
+      resources = allResources
+    }
+    window.history.pushState({}, '', url)
   }
 </script>
 
@@ -29,12 +56,7 @@
   <Loading></Loading>
 {:else}
   <div class="flex flex-col items-stretch max-w-4xl my-0 mx-auto">
-    <div class="search">
-      <div class="search-input search-input rounded-lg flex items-center h-10 mb-6 px-4">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input class="focus:outline-none bg-transparent ml-4" type="search">
-      </div>
-    </div>
+    <TagInput on:update={reloadTags} {tags}></TagInput>
 
     {#each resources as resource}
     <div class="doc flex p-2" class:selected="{current === resource.nombre}">
@@ -63,8 +85,5 @@
   }
   .download-btn:hover {
     color: var(--text-2);
-  }
-  .search-input {
-    background-color: var(--white-2);
   }
 </style>
