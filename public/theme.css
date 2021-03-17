@@ -105,3 +105,8 @@ a {
   color: rgb(51, 51, 51);
   font-weight: 500;
 }
+
+.post img {
+  margin: 0 auto;
+  width: 50%;
+}
