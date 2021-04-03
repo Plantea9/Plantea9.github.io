@@ -7,12 +7,14 @@
   import Post from './pages/Post.svelte'
   import Footer from './ui/Footer.svelte'
   import Header from './ui/Header.svelte'
+  import Members from './pages/Members.svelte'
 
   export let url = ''
   const links = [
     { href: '/', name: 'Inicio' },
     { href: '/resources', name: 'Recursos' },
-    { href: '/blog', name: 'Blog' }
+    { href: '/blog', name: 'Blog' },
+    { href: '/members', name: 'Nosotros' }
   ]
 </script>
 
@@ -22,6 +24,7 @@
   <Header {links}></Header>
 
   <main class="my-0 mx-auto relative max-w-4xl bg-transparent p-8 box-border z-10 pb-16 sm:pt-16">
+    <Route path='/members' component={Members}></Route>
     <Route path='/resources' component={Resources}></Route>
     <Route path='/blog/:id' let:params>
       <Post id={params.id}></Post>
