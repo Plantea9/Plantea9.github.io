@@ -25,9 +25,10 @@
 
     <div class="site">
       <ul class="list-none">
-        <li><a href="/" class="text-white visited:text-gray-100">Inicio</a></li>
-        <li><a href="/resources" class="text-white visited:text-gray-100">Recursos</a></li>
-        <li><a href="/blog" class="text-white visited:text-gray-100">Blog</a></li>
+        <li class="mb-1.5"><a href="/" class="text-white visited:text-gray-100">Inicio</a></li>
+        <li class="mb-1.5"><a href="/resources" class="text-white visited:text-gray-100">Recursos</a></li>
+        <li class="mb-1.5"><a href="/blog" class="text-white visited:text-gray-100">Blog</a></li>
+        <li class="mb-1.5"><a href="/members" class="text-white visited:text-gray-100">Nosotros</a></li>
       </ul>
     </div>
   </div>
