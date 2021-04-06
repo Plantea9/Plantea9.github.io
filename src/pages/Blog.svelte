@@ -7,6 +7,7 @@
   ;(async () => {
     const response = await fetch(process.env.POSTS_URL)
     posts = await response.json()
+    posts = posts.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime())
     if (response.ok) {
       loading = false
     }
@@ -150,7 +151,7 @@
   <Loading></Loading>
 {:else}
   {#each posts as post}
-    <div class="relative pt-6 shadow-lg rounded-md bg-white mb-4">
+    <div class="blog relative pt-6 shadow-lg rounded-md bg-white mb-4">
       <h2 class="font-bold text-xl mb-4 px-4">{post.Titulo}</h2>
       <div class="text-gray-500 mb-8 px-4">{@html trimHtml(post.Contenido).html}</div>
       <a on:click={e => navigate(`/blog/${post.id}`)} class="cursor-pointer absolute inset-x-0 w-20 rounded-xl bg-purple-900 text-gray-100 py-1 px-2 justify-center items-center mx-auto my-0 flex text-sm bottom-20">Leer más</a>
