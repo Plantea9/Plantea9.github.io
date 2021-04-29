@@ -1,5 +1,4 @@
 <script>
-  import { GoogleAnalytics } from '@beyonk/svelte-google-analytics'
   import { Router, Route } from 'svelte-routing'
   import Index from './pages/Index.svelte'
   import Resources from './pages/Resources.svelte'
@@ -17,8 +16,6 @@
     { href: '/members', name: 'Nosotros' }
   ]
 </script>
-
-<GoogleAnalytics properties={[ '262801169' ]} />
 
 <Router {url}>
   <Header {links}></Header>

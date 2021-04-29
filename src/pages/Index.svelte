@@ -20,7 +20,7 @@
   <Banner></Banner>
   <div class="flex-wrap flex items-center justify-evenly">
     {#each links as {Imagen, Titulo, Link}}
-      <DirectLink chico width="40%" src={Imagen.url} href={Link} desc={Titulo} ></DirectLink>
+      <DirectLink chico width="40%" src={Imagen.formats.small.url} href={Link} desc={Titulo} ></DirectLink>
     {/each}
   </div>
 {/if}
