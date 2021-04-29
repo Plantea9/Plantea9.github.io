@@ -3,7 +3,7 @@
     <div class="member-avatar overflow-hidden h-48 md:h-64 relative">
       <img class="cary absolute inset-x-0 transition-all" src="{process.env.CARY_URL}">
     </div>
-    <span class="block text-lg font-bold text-gray-700">Carina Fernandez / Vicepreseidenta</span>
+    <span class="block text-lg font-bold text-gray-700">Carina Fernandez / Vicepresidenta</span>
     <span class="block text-gray-500">Departamento de expresión</span>
   </div>
 
