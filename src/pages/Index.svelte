@@ -3,6 +3,29 @@
   import Loading from '../ui/Loading.svelte'
   import DirectLink from '../ui/DirectLink.svelte'
 
+  const token = process.env.DATOCMS_API_TOKEN
+  fetch(
+    'https://graphql.datocms.com/preview',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        query: '{ allPosts { titulo } }'
+      }),
+    }
+  )
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res.data)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
   let links = []
   let loading = true
   ;(async () => {
