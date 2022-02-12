@@ -1,6 +1,4 @@
 <script>
-  import { client } from './apollo'
-  import { setClient } from 'svelte-apollo'
   import { Router, Route } from 'svelte-routing'
   import Index from './pages/Index.svelte'
   import Resources from './pages/Resources.svelte'
@@ -9,8 +7,6 @@
   import Footer from './ui/Footer.svelte'
   import Header from './ui/Header.svelte'
   import Members from './pages/Members.svelte'
-
-  setClient(client)
 
   export let url = ''
   const links = [
