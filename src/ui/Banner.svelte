@@ -1,17 +1,9 @@
 <script>
-  import { query } from '../graphql'
+  import { getMedia } from '../graphql'
   import { logo } from '../store'
 
   $: if (!$logo) {
-    query`query MyQuery {
-      allUploads(filter: {id: {eq: "${process.env.DATOCMS_LOGO_ID}"}}) {
-        filename
-        mimeType
-        url
-        id
-        title
-      }
-    }`.then(l => logo.set(l.allUploads[0]))
+    getMedia(process.env.DATOCMS_LOGO_ID).then(l => logo.set(l))
   }
 </script>
 

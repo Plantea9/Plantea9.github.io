@@ -23,3 +23,23 @@ export async function query (strings, ...keys) {
     throw new Error(response.statusText)
   }
 }
+
+export async function getMedia(id) {
+  const filter = Array.isArray(id) ?
+    `in: ["${id.join('","')}"]` :
+    `eq: "${id}"`
+  const media = await query`query MyQuery {
+    allUploads(filter: {id: {${filter}}}) {
+      filename
+      mimeType
+      url
+      id
+      title
+      alt
+      customData
+    }
+  }`
+  return Array.isArray(id) ?
+    media.allUploads :
+    media.allUploads[0]
+}
