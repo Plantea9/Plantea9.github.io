@@ -11,9 +11,9 @@
 
   function download (resource) {
     const a = document.createElement('a')
-    a.href = resource.archivo.url
+    a.href = resource.link || resource.archivo.url
     a.download = true
-    a.target = '_blank'
+
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -45,9 +45,11 @@
         <span class="font-bold block">Última actualización:</span>
         <span class="block mb-4">{dayjs(resource._updatedAt).fromNow()}</span>
         <span class="font-bold">Formato:</span>
-        <span class="mr-4">{resource.archivo.format.replace('.', '')}</span>
-        <span class="font-bold">Tamaño:</span>
-        <span>{showSize(resource.archivo.size)}</span>
+        <span class="mr-4">{resource.archivo ? resource.archivo.format.replace('.', '') : 'pdf'}</span>
+        {#if resource.archivo}
+          <span class="font-bold">Tamaño:</span>
+          <span>{showSize(resource.archivo.size)}</span>
+        {/if}
       </div>
       <div class="file-data self-start md:w-5/12">
         <span class="font-bold block">Tags:</span>

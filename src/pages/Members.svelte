@@ -40,7 +40,7 @@
   img:hover {
     filter: grayscale(0);
   }
-  .romina {
+  :global(.romina) {
     clip-path: circle(4.5rem at 50% 40%);
   }
   .romina, .ghilian, .nati, .yerko {
