@@ -15,7 +15,7 @@
         nombre
         region
       }
-    }`.then(l => members.set(l.allMiembros))
+    }`.then(l => members.set(l.allMiembros.sort((a, b) => b.fundador ? 1 : -1)))
   }
 </script>
 

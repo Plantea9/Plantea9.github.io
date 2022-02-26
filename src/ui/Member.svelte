@@ -2,7 +2,7 @@
   export let member
 </script>
 
-<div style="--bg-url: url({member.foto.url})" class="member relative w-2/5 h-64">
+<div style="--bg-url: url({member.foto.url})" class="member relative w-full md:lg:w-2/5 lg:w-2/5 h-64">
   <div class="pic absolute bg-gray-500 w-20 h-20"></div>
   <!-- <img class="absolute" src="{member.foto.url}" alt="{member.foto.alt}"/> -->
   <div class="info shadow h-40">
