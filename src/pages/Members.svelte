@@ -1,31 +1,27 @@
 <script>
-  import { getMedia } from '../graphql'
+  import Member from '../ui/Member.svelte'
+  import { query } from '../graphql'
   import { members } from '../store'
 
   $: if ($members.length === 0) {
-    getMedia([
-      process.env.DATOCMS_YERKO_ID,
-      process.env.DATOCMS_ROMINA_ID,
-      process.env.DATOCMS_NATI_ID,
-      process.env.DATOCMS_GHILIAN_ID,
-      process.env.DATOCMS_CARI_ID
-    ]).then(l => members.set(l))
+    query`query MyQuery {
+      allMiembros {
+        departamento
+        foto {
+          url
+        }
+        fundador
+        id
+        nombre
+        region
+      }
+    }`.then(l => members.set(l.allMiembros))
   }
 </script>
 
-<div class="members flex flex-wrap">
+<div class="members flex flex-wrap justify-between">
   {#each $members as member}
-    <div class="member w-full md:w-1/2 text-center">
-      <div class="member-avatar overflow-hidden h-48 md:h-64 relative">
-        <img 
-          class="{member.customData.css} absolute inset-x-0 transition-all" 
-          src="{member.url}"
-          alt="{member.alt}"
-          >
-      </div>
-      <span class="block text-lg font-bold text-gray-700">{member.title}</span>
-      <span class="block text-gray-500">{member.alt}</span>
-    </div>
+    <Member {member}></Member>
   {/each}
 </div>
 
