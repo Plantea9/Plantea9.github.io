@@ -24,30 +24,3 @@
     <Member {member}></Member>
   {/each}
 </div>
-
-<style>
-  img {
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 1rem;
-    filter: grayscale(1);
-    clip-path: circle(4.5rem at 50% 35%);
-  }
-  img:hover {
-    filter: grayscale(0);
-  }
-  :global(.romina) {
-    clip-path: circle(4.5rem at 50% 40%);
-  }
-  .romina, .ghilian, .nati, .yerko {
-    top: 2rem;
-  }
-  @media (min-width: 768px) {
-    img {
-      clip-path: circle(6rem at 50% 35%);
-    }
-    .romina {
-      clip-path: circle(6rem at 50% 46%);
-    }
-  }
-</style>
