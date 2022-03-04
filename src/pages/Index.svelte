@@ -18,7 +18,6 @@
       }
     `.then(l => links.set(l.allAccesoDirectos))
   }
-  
 </script>
 
 {#if !$links}
