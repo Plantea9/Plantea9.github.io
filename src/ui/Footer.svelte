@@ -1,9 +1,10 @@
 <script>
-  let logo = {}
-  ;(async () => {
-    const response = await fetch(process.env.LOGO_ALT_URL)
-    logo = await response.json()
-  })()
+  import { getMedia } from '../graphql'
+  import { logoAlt } from '../store'
+
+  $: if (!$logoAlt) {
+    getMedia(process.env.DATOCMS_LOGO_ALT_ID).then(l => logoAlt.set(l))
+  }
 </script>
 
 <footer class="relative">
@@ -18,8 +19,8 @@
     </div>
 
       <a href="/">
-        {#if logo && logo.formats}
-          <img src="{logo.formats.thumbnail.url}" alt="Logo planTea">
+        {#if $logoAlt}
+          <img src="{$logoAlt.url}" alt="Logo planTea">
         {/if}
       </a>
 

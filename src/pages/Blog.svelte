@@ -1,17 +1,50 @@
 <script>
   import { navigate } from 'svelte-routing'
+  import { render } from 'datocms-structured-text-to-html-string'
   import Loading from '../ui/Loading.svelte'
+  import { query } from '../graphql'
+  import { posts } from '../store'
 
-  let posts = []
-  let loading = true
-  ;(async () => {
-    const response = await fetch(process.env.POSTS_URL)
-    posts = await response.json()
-    posts = posts.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime())
-    if (response.ok) {
-      loading = false
-    }
-  })()
+  const options = {
+    renderBlock({ record, adapter: { renderNode } }) {
+      return renderNode('figure', {}, renderNode('img', { src: record.archivo.url }));
+    },
+    renderInlineRecord({ record, adapter: { renderNode } }) {
+      return renderNode('a', { href: `/blog/${record.slug}` }, record.title);
+    },
+    renderLinkToRecord({ record, children, adapter: { renderNode } }) {
+      return renderNode('a', { href: `/blog/${record.slug}` }, children);
+    },
+  }
+
+  $: if (!$posts || $posts.length === 0) {
+    query`query MyQuery {
+      allPosts {
+        titulo
+        id
+        autor {
+          nombre
+          foto {
+            url
+          }
+        }
+        _publishedAt
+        contenido {
+          value
+          blocks {
+            archivo {
+              url
+            }
+            id
+          }
+          links {
+            titulo
+            id
+          }
+        }
+      }
+    }`.then(l => posts.set(l.allPosts))
+  }
 
   function showDate (date) {
     const d = new Date(date)
@@ -147,18 +180,27 @@
   }
 </script>
 
-{#if loading}
+{#if !$posts || $posts.length === 0}
   <Loading></Loading>
 {:else}
-  {#each posts as post}
+  {#each $posts as post}
     <div class="blog relative pt-6 shadow-lg rounded-md bg-white mb-4">
-      <h2 class="font-bold text-xl mb-4 px-4">{post.Titulo}</h2>
-      <div class="text-gray-500 mb-8 px-4">{@html trimHtml(post.Contenido).html}</div>
+      <h2 class="font-bold text-xl mb-4 px-4">{post.titulo}</h2>
+      <div class="text-gray-500 mb-8 px-4">{@html trimHtml(render(post.contenido, options)).html}</div>
       <a on:click={e => navigate(`/blog/${post.id}`)} class="cursor-pointer absolute inset-x-0 w-20 rounded-xl bg-purple-900 text-gray-100 py-1 px-2 justify-center items-center mx-auto my-0 flex text-sm bottom-20">Leer más</a>
       <div class="flex flex-col px-4 pb-6 pt-4 bg-gradient-to-r from-purple-400 to-purple-300 rounded-b-md">
-        <span class="text-white font-medium">{post.Author.username}</span>
-        <span class="text-gray-200">{showDate(post.createdAt)}</span>
+        <span class="text-white font-medium">
+          <img class="avatar mr-2 w-6 inline-block h-6 rounded-full ring-2 ring-white" src="{post.autor.foto.url}" alt="{post.autor.nombre}">
+          {post.autor.nombre}
+        </span>
+        <span class="text-gray-200">{showDate(post._publishedAt)}</span>
       </div>
     </div>
   {/each}
 {/if}
+
+<style>
+  .avatar {
+    width: 1.5rem !important;
+  }
+</style>

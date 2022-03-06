@@ -1,5 +1,3 @@
-const tailwindui = require('@tailwindcss/ui')
-
 module.exports = {
   purge: false, // Purging is taken care of in postcss.config.js
   theme: {
@@ -24,8 +22,7 @@ module.exports = {
   },
   variants: {},
   plugins: [
-    tailwindui,
-    require('@tailwindcss/custom-forms')
+    require('@tailwindcss/forms')
   ],
 
   future: {
