@@ -9,7 +9,7 @@
 
 <div class="flex items-center justify-center flex-col">
   <img class="w-40 inline-block" src="{$logo ? $logo.url : ''}" alt="Logo planTea">
-  <span class="hero-span text-center w-3/5 sm:w-full">Compartiendo nuestro mundo</span>
+  <span class="hero-span text-center w-3/5 sm:w-full">Comunidad autista</span>
 </div>
 
 <style>
