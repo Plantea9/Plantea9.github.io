@@ -110,6 +110,18 @@ a {
   margin: 0 auto;
   width: 50%;
 }
+
+.post p {
+  color: rgb(41, 41, 41);
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.06px;
+  overflow-wrap: break-word;
+  text-rendering: optimizelegibility;
+  margin-block-start: 40px;
+  margin-block-end: -9.2px;
+}
+
 .blog img {
   margin: 0 auto;
   width: 50%;
